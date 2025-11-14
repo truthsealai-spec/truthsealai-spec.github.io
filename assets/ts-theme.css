@@ -1,0 +1,68 @@
+/* TruthSeal Neon Theme v1.0 */
+:root{
+  --bg:#0a0f17; --panel:#0f1824; --ink:#e6f4ff; --muted:#8fb2c3;
+  --link:#9dd7ff; --accent:#5ef0b5; --accent2:#7ac8ff;
+}
+html,body{height:100%}
+body{
+  margin:0; color:var(--ink);
+  font-family:-apple-system,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji";
+  line-height:1.6;
+  background:
+    radial-gradient(1200px 600px at 10% 0%, rgba(123,211,255,.08), transparent 60%),
+    radial-gradient(900px 600px at 90% 10%, rgba(94,240,181,.10), transparent 55%),
+    linear-gradient(180deg,#080e15 0%,#0a0f17 100%);
+}
+.wrap{
+  max-width:920px;margin:40px auto;padding:32px;border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)) padding-box,
+             radial-gradient(1200px 800px at -10% -10%, rgba(124,255,189,.15), transparent 50%) border-box;
+  border:1px solid rgba(123,211,255,.18);
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+h1.brand{
+  font-size:clamp(32px,6vw,56px);line-height:1.05;margin:0 0 12px;letter-spacing:.3px;
+  background:linear-gradient(90deg,var(--accent) 0%,var(--accent2) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;
+}
+p.muted{color:var(--muted);margin-top:4px}
+h3{font-size:24px;margin:26px 0 8px}
+ul{list-style:none;padding-left:0;margin:0 0 6px}
+ul li{padding:12px 0;border-bottom:1px dashed rgba(123,211,255,.18)}
+ul li:last-child{border-bottom:0}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+.tag{
+  display:inline-block;font-size:.85rem;padding:2px 10px;border-radius:999px;
+  border:1px solid rgba(123,211,255,.25);color:var(--ink);background:rgba(15,24,36,.7);margin-left:10px;
+}
+.card{
+  padding:16px 18px;border-radius:12px;border:1px solid transparent;
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)) padding-box,
+             linear-gradient(135deg, rgba(94,240,181,.6), rgba(123,211,255,.45)) border-box;
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+}
+.card a{display:block;font-weight:600}
+.btn,button{
+  display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid rgba(123,211,255,.25);
+  background:linear-gradient(180deg,rgba(123,211,255,.12),rgba(94,240,181,.12));
+  color:var(--ink);text-decoration:none;font-weight:600;
+}
+.btn:hover,button:hover{filter:brightness(1.1)}
+input,select{
+  background:#0c1622;border:1px solid rgba(123,211,255,.25);color:var(--ink);
+  border-radius:10px;padding:10px 12px;width:100%;box-sizing:border-box;
+}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
+.acs{
+  font-size:clamp(34px,7vw,64px);font-weight:800;letter-spacing:.5px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.small{color:var(--muted);font-size:.9rem}
+hr.line{border:0;border-top:1px dashed rgba(123,211,255,.18);margin:22px 0}
+.panel{
+  padding:20px;border-radius:14px;border:1px solid rgba(123,211,255,.18);
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+}
