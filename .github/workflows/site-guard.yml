@@ -1,0 +1,40 @@
+name: Site Guard
+
+on:
+  pull_request:
+    paths: ["**/*.html","assets/**",".github/workflows/site-guard.yml","scripts/**"]
+  push:
+    branches: [main]
+    paths: ["**/*.html","assets/**",".github/workflows/site-guard.yml","scripts/**"]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install linters
+        run: |
+          npm init -y >/dev/null 2>&1 || true
+          npm install --no-audit --no-fund html-validate@8 htmlhint@1 -D
+
+      - name: HTML validate (strict)
+        run: npx html-validate "**/*.html" --config ./.htmlvalidate.json
+
+      - name: HTMLHint (advisory)
+        run: npx htmlhint "**/*.html" || true
+
+      - name: Theme check (neon skin)
+        run: node scripts/theme-check.mjs
+
+      - name: Link check (external and internal)
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --no-progress --exclude-mail '^mailto:' --base . "**/*.html"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
