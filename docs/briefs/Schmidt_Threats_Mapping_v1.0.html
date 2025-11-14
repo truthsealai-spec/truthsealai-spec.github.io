@@ -1,6 +1,9 @@
-<link rel="stylesheet" href="/assets/ts-theme.css">
-<!doctype html>
-<html lang="en">
+<div class="wrap toolbar">
+  <a class="btn" href="/docs/">&larr; Back</a>
+  <a class="btn" href="/docs/">Home</a>
+  <div class="spacer"></div>
+  <button class="btn" onclick="printPDF()">Print / Save as PDF</button>
+</div>
 <head>
   <meta charset="utf-8">
   <title>TruthSeal™ — Mapping Schmidt’s AI Threats to TQC Defense</title>
@@ -119,7 +122,13 @@
       </p>
     </section>
 
-    <footer class="footer" style="margin-top:28px">
-  <p class="small">© 2025 TruthSeal™ — Public Brief</p>
-  <p class="tiny">Public overview. Some implementation details may be subject to classification and NDA.</p>
+    <footer class="wrap">
+  <div class="card">
+    <p class="small">© 2025 TruthSeal™ — Public overview. Some sections redacted.</p>
+    <p class="tiny">Disclaimer: Educational/briefing material; not legal, medical, or investment advice.</p>
+  </div>
 </footer>
+<script>
+  // ensure one simple print action
+  function printPDF(){ window.print(); }
+</script>
