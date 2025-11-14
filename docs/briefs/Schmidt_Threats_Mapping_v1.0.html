@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TruthSeal™ — Mapping Schmidt’s AI Threats to TQC Defense</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <style>
+    :root{
+      --bg:#070a0d; --bg2:#0a1116; --ink:#e6f1ff; --muted:#9fb3c8;
+      --accent:#64ffda; --accent2:#00e5ff; --accent3:#14ff72;
+      --card:#0f1820; --line:#133040; --good:#20df87; --warn:#ffd166; --bad:#ff6b6b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:
+      radial-gradient(1200px 700px at 15% -10%, #0e212a 0%, var(--bg) 55%),
+      linear-gradient(160deg, var(--bg2), var(--bg));
+      color:var(--ink); font:15px/1.6 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Inter,system-ui,sans-serif}
+    a{color:var(--accent2); text-decoration:none} a:hover{text-decoration:underline}
+    .wrap{max-width:960px; margin:32px auto; padding:0 16px}
+    header{border:1px solid var(--line); background:linear-gradient(180deg,#0b151c, #0a1116);
+      border-radius:14px; padding:20px 16px; position:relative; overflow:hidden}
+    header::before{content:""; position:absolute; inset:auto -60px -60px auto; width:360px; height:360px;
+      background: radial-gradient(closest-side, rgba(100,255,218,.12), transparent 70%); filter:blur(10px)}
+    h1{margin:4px 0 6px; font-weight:700; font-size:22px}
+    .deck{color:var(--muted); margin:0 0 6px}
+    .tag{display:inline-block; border:1px solid var(--line); padding:4px 10px; border-radius:999px; margin-right:8px; color:var(--accent)}
+    .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .btn{appearance:none; border:1px solid var(--line); background:var(--card); color:var(--ink);
+      padding:10px 12px; border-radius:10px; cursor:pointer}
+    .btn:hover{border-color:#24546c}
+    .card{border:1px solid var(--line); background:linear-gradient(180deg,#101a22,#0c141a);
+      border-radius:14px; padding:16px; margin-top:14px}
+    h2{font-size:18px; margin:0 0 10px; color:var(--accent)}
+    h3{font-size:16px; margin:14px 0 8px; color:var(--accent2)}
+    table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:12px; border:1px solid var(--line)}
+    th,td{padding:12px; vertical-align:top}
+    thead th{background:#0d1820; color:#bfefff; font-weight:600; border-bottom:1px solid var(--line)}
+    tbody tr:nth-child(odd) td{background:#0c141a}
+    tbody tr:nth-child(even) td{background:#0b1217}
+    .note{font-size:13px; color:var(--muted)}
+    footer{margin:18px 0 60px; color:var(--muted); text-align:center}
+    @media print{ body{background:#fff;color:#000} header,.btn{border-color:#ddd;background:#fff} a{color:#000} }
+  </style>
+  <script> function printPDF(){ window.print(); } </script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="tag">TruthSeal™</div>
+      <div class="tag">Threat Mapping</div>
+      <h1>Schmidt’s Three AI Threats → TQC Structural Defense</h1>
+      <p class="deck">
+        Mapping public concerns (misinformation, biological misuse, geopolitical hardware imbalance) to TruthSeal’s hardware-enforced coherence,
+        with clear actions for democratic regulators.
+      </p>
+      <div class="toolbar">
+        <button class="btn" onclick="history.back()">← Back</button>
+        <a class="btn" href="/index.html">Home</a>
+        <button class="btn" onclick="printPDF()">Print / Save as PDF</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Definitions (plain language)</h2>
+      <ul>
+        <li><strong>Law of Ethical Irreversibility (LEI = 1):</strong> A hardware rule that prevents incoherent or harmful execution paths.</li>
+        <li><strong>Aim Coherence Score (ACS):</strong> A live number (target 1.0) proving the system is operating coherently now.</li>
+        <li><strong>TQC Coherence Core:</strong> A small TruthSeal™ hardware block that enforces LEI=1, computes ACS, and emits signed receipts.</li>
+        <li><strong>Post-quantum cryptography (PQC):</strong> Signatures designed to remain secure even when quantum computers arrive.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Threats → Structural Defense → Regulator Action</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Threat (public concern)</th>
+            <th>TQC Structural Defense (what the hardware does)</th>
+            <th>Democratic Action (what to require)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Misinformation at scale</strong></td>
+            <td>Require every large-scale AI output to carry a hardware-signed receipt with ACS at the moment of generation.</td>
+            <td>Mandate ACS receipts for systemic content and for financial modeling that reaches the public sphere.</td>
+          </tr>
+          <tr>
+            <td><strong>Biological misuse</strong></td>
+            <td>LEI-gate blocks executive control paths that attempt to generate, optimize, or route harmful genetic designs.</td>
+            <td>Adopt TQC-certified silicon for all AI used in pharmaceutical and bio-synthesis pipelines.</td>
+          </tr>
+          <tr>
+            <td><strong>Geopolitical hardware imbalance</strong></td>
+            <td>TruthSeal defines the integrity class (Tier-1) where incoherent actions are non-admissible by design.</td>
+            <td>Recognize a two-tier system: Tier-1 (TQC-certified) for sovereign infrastructure; Tier-2 (probabilistic) for everything else.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">
+        Receipts include ACS, time, a monotonic counter, and a PQC signature; optional public time-anchoring is available without exposing data.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Bottom Line</h2>
+      <p>
+        Move control from policy that can be ignored to hardware that cannot be bypassed. TruthSeal™ supplies the physical law and the proof.
+        Regulators demand it; markets stabilize on it; the public can verify it.
+      </p>
+    </section>
+
+    <footer>
+      © TruthSeal™ — Coherence by design. <a href="/index.html">Return to index</a>
+    </footer>
+  </div>
+</body>
+</html>
