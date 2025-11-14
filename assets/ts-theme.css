@@ -1,93 +1,61 @@
-/* TruthSeal Neon Theme v1.2 — dark neon / mobile */
-
-/* === Palette (night-ops, low glare) === */
+/* TruthSeal Neon Theme v1.2 — dark neon / mobile-first */
 :root{
-  --bg:#06121f;            /* page background (very dark navy) */
-  --panel:#0c1826;         /* card/panel background */
-  --ink:#d3e6fb;           /* main text (soft ice, not pure white) */
-  --muted:#9bb9d3;         /* secondary text */
-  --line:rgba(123,211,255,.12); /* separators/borders */
-  --link:#8fc9ff;          /* links (soft blue) */
-  --accent:#22e089;        /* TruthSeal mint */
-  --accent-2:#4fc3ff;      /* cyan-blue support */
+  --bg:#06121f;          /* deep navy/black */
+  --panel:#0b1e34;       /* card bg */
+  --ink:#e6f1ff;         /* soft white-blue text */
+  --muted:#9bb3c7;       /* secondary text */
+  --line:rgba(123,211,255,.18);
+  --chip:rgba(123,211,255,.14);
+  --link:#9dd7ff;        /* light blue (the one you liked) */
+  --accent:#5ef0b5;      /* neon green (the one you liked) */
+  --accent-2:#63a1ff;    /* cyan-blue accent */
 }
 
 html,body{height:100%}
 body{
   margin:0; color:var(--ink);
-  font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;
+  font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;
   line-height:1.55;
-  /* Subtle depth without bright flares */
   background:
-    radial-gradient(900px 480px at 12% -10%, rgba(34,56,84,.28), transparent 55%),
-    radial-gradient(900px 480px at 90% 110%, rgba(10,38,38,.22), transparent 55%),
-    linear-gradient(180deg,#06121f 0%, #040b12 100%);
+    radial-gradient(1200px 700px at 80% -10%, rgba(0,150,255,.05), transparent 60%),
+    radial-gradient(900px 600px at 10% 110%, rgba(0,255,200,.06), transparent 58%),
+    linear-gradient(180deg, #081a2a 0%, #04101d 100%);
 }
 
-/* Wrapper card */
 .wrap{
-  max-width:920px; margin:40px auto; padding:28px 22px;
-  background:linear-gradient(180deg, rgba(12,24,38,.65), rgba(6,16,27,.65));
-  border:1px solid var(--line); border-radius:16px;
+  max-width:960px; margin:40px auto; padding:28px 22px;
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(12,22,40,.65), rgba(7,16,28,.65));
+  border:1px solid var(--line);
   box-shadow:0 30px 80px rgba(0,0,0,.6);
 }
 
-/* Brand */
 h1.brand{
   font-size:clamp(32px,6vw,56px); line-height:1.05; margin:0 0 8px;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  background:linear-gradient(90deg, var(--accent), var(--accent-2));
   -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow:0 0 24px rgba(94,240,181,.25);
 }
+
 p.muted{color:var(--muted); margin-top:4px}
-
-/* Sections */
-h3{font-size:24px; margin:26px 8px 8px}
-
-/* Lists & links */
+h3{font-size:24px; margin:26px 0 8px}
 ul{list-style:none; padding-left:0; margin:0}
 ul li{padding:12px 0; border-bottom:1px dashed var(--line)}
 ul li:last-child{border-bottom:0}
 a{color:var(--link); text-decoration:none}
 a:hover{text-decoration:underline}
+
 .tag{
-  display:inline-block; font-size:.85rem; padding:3px 10px; margin-left:10px;
-  border:1px solid rgba(123,211,255,.25); border-radius:999px; color:var(--muted)
+  display:inline-block; font-size:.85rem;
+  border:1px solid rgba(123,211,255,.25);
+  background:var(--chip);
+  padding:3px 8px; border-radius:999px; margin-left:8px; color:var(--link);
 }
 
-/* Download card */
-.card{
-  margin:14px 8px; padding:16px 18px; border-radius:12px;
-  border:1px solid rgba(34,224,137,.22);
-  background:linear-gradient(180deg, rgba(34,224,137,.08), rgba(34,224,137,.02));
-}
-
-/* Demo controls (ACS page) */
-.panel{margin-top:18px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px}
-.grid{display:grid; grid-template-columns:1fr; gap:12px}
-label{color:var(--muted)}
-input, select{
-  width:100%; box-sizing:border-box; border-radius:10px;
-  background:#0a1a2b; color:var(--ink);
-  border:1px solid rgba(123,211,255,.18); padding:10px 12px;
-}
-.btn{
-  display:inline-block; padding:12px 18px; border-radius:10px; font-weight:600;
-  background:#123a67; color:#fff; border:1px solid rgba(123,211,255,.25);
-}
-.btn:hover{filter:brightness(1.08)}
-.status{
-  display:inline-block; padding:6px 12px; border-radius:999px; font-weight:700;
-  border:1px solid rgba(34,224,137,.35); background:rgba(34,224,137,.10);
-}
-
-/* Fine lines */
-hr.line{border:0; border-top:1px solid var(--line); margin:24px 0}
-
-/* Print: flat, ink-friendly */
-@media print{
-  *{background:none !important; box-shadow:none !important}
-  body{background:#fff !important; color:#000 !important}
-  .wrap{border:0; padding:0; margin:0}
-  a{color:#000 !important; text-decoration:underline}
-  a::after{content:" (" attr(href) ")"; font-size:.85em; color:#444}
-}
+.card{border:1px solid var(--line); border-radius:14px; padding:16px;
+  background:linear-gradient(180deg, rgba(10,24,40,.55), rgba(6,18,31,.55))}
+p.small{font-size:.9rem; color:var(--muted)}
+hr.line{border:none; height:1px; background:var(--line); margin:24px 0}
+footer{margin:18px 0 6px; color:var(--muted)}
+footer a{color:var(--link)}
+@media print{ body{background:#000} .wrap{box-shadow:none} }
