@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ACS Receipt Standard — TruthSeal™</title>
+<style>
+  body{max-width:820px;margin:40px auto;padding:0 18px;font:16px/1.55 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial}
+  h1{font-size:28px;margin:.2em 0 .6em} h2{margin:1.2em 0 .4em} code,pre{background:#f6f8fa;border:1px solid #eaecef;border-radius:6px}
+  pre{padding:12px;overflow:auto} .tag{display:inline-block;font-size:12px;border:1px solid #ddd;border-radius:999px;padding:2px 8px;margin-left:8px}
+  ul{padding-left:20px} .muted{color:#666}
+</style>
+<h1>ACS Receipt Standard <span class="tag">public explainer</span></h1>
+<p class="muted">Acronyms: <strong>LEI</strong> = Law of Ethical Irreversibility; <strong>ACS</strong> = Aim Coherence Score; <strong>PQC</strong> = Post-Quantum Cryptography; <strong>OTS</strong> = OpenTimestamps (Bitcoin time anchoring); <strong>CSF</strong> = Coherence Sync Fabric; <strong>SIFI</strong> = Systemically Important Financial Institution.</p>
+
+<h2>What is an ACS receipt?</h2>
+<p>It is a hardware-signed, time-stamped proof that a specific AI action executed under the <strong>LEI=1</strong> constraint with a live <strong>ACS</strong> telemetry reading, and that this proof is anchored to public time (via <strong>OTS</strong>) with a <strong>PQC</strong> signature resistant to future quantum attacks.</p>
+
+<h2>Why it exists</h2>
+<ul>
+  <li><strong>Origin proof</strong>: who/what made the decision.</li>
+  <li><strong>Integrity proof</strong>: LEI-gate state + ACS at decision time.</li>
+  <li><strong>Durability</strong>: PQC signature + public time anchor (OTS) → survives the quantum era.</li>
+</ul>
+
+<h2>Receipt fields (minimal schema)</h2>
+<pre><code>{
+  "action_id": "uuidv7",
+  "actor": {"model_id": "tqc/agent:v1", "host_id": "edge-42"},
+  "lei_gate_state": "ENFORCED",      // hardware gate
+  "acs_value": 0.97,                 // Aim Coherence Score
+  "decision": "approve|deny|halt",
+  "timestamp_utc": "2025-11-14T01:23:45Z",
+  "pqc_signature": {"alg": "CRYSTALS-Dilithium2", "sig": "...base64..."},
+  "ots_calendar_id": "TBD",          // when issued
+  "ots_anchor_status": "Receipt issued — awaiting Bitcoin confirmation",
+  "csf_trace": "sha256-of-stream"    // optional rolling hash of CSF telemetry
+}</code></pre>
+
+<h2>How auditors verify</h2>
+<ol>
+  <li><strong>PQC check</strong> — verify the Dilithium signature against the device certificate.</li>
+  <li><strong>LEI/ACS check</strong> — confirm LEI-gate was ENFORCED and ACS ≥ policy threshold.</li>
+  <li><strong>Time check</strong> — confirm OTS calendar receipt and anchor inclusion proof.</li>
+</ol>
+
+<h2>Policy defaults</h2>
+<ul>
+  <li>Critical infrastructure: <strong>ACS ≥ 0.95</strong>, LEI=1 enforced, PQC mandatory, OTS required.</li>
+  <li>Public-impacting AI (markets/health): <strong>ACS ≥ 0.90</strong>, same cryptographic requirements.</li>
+</ul>
+
+<p class="muted">© TruthSeal™ — public explainer; formal spec lives in the private ledger.</p>
+</html>
