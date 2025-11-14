@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TruthSeal — Local ACS + Receipt Demo (Offline)</title>
+  <link rel="stylesheet" href="/assets/ts-theme.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1 class="brand">TruthSeal — Local ACS + Receipt Demo (Offline)</h1>
+    <p class="muted">Runs entirely in the browser. No network. Use this to show a real <em>Aim Coherence Score</em> and then save a receipt JSON locally.</p>
+
+    <div class="panel">
+      <div class="grid">
+        <div>
+          <label>Purity (no contradiction) — range [0…1]</label>
+          <input id="purity" type="number" step="0.01" min="0" max="1" value="1">
+        </div>
+        <div>
+          <label>Temporal drift — range [0…1]</label>
+          <input id="drift" type="number" step="0.01" min="0" max="1" value="0">
+        </div>
+        <div>
+          <label>Ethical irreversibility (LEI)</label>
+          <select id="lei">
+            <option value="ENFORCED" selected>ENFORCED</option>
+            <option value="DISABLED">DISABLED</option>
+          </select>
+        </div>
+        <div>
+          <label>Secure attestation (trusted boot)</label>
+          <select id="attest">
+            <option value="trusted" selected>trusted</option>
+            <option value="untrusted">untrusted</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="muted" style="margin:16px 0 8px">Aim Coherence Score</p>
+      <div id="acs" class="acs">1.0000</div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">
+        <button id="reset" class="btn" type="button">Reset to Coherent</button>
+        <button id="gen" class="btn" type="button">Generate Receipt</button>
+        <button id="download" class="btn" type="button">Download JSON</button>
+        <button id="show" class="btn" type="button">Show JSON</button>
+        <button id="copy" class="btn" type="button">Copy JSON</button>
+      </div>
+    </div>
+
+    <pre id="out" class="small" style="margin-top:16px;overflow:auto;max-height:50vh"></pre>
+    <p class="small">ACS = Purity × (1 − Drift) × LEI (1.0 if ENFORCED, else 0). Attestation is recorded separately and required for “green” status.</p>
+  </div>
+
+  <script>
+    const purity=document.getElementById('purity');
+    const drift=document.getElementById('drift');
+    const leiSel=document.getElementById('lei');
+    const attest=document.getElementById('attest');
+    const acsEl=document.getElementById('acs');
+    const out=document.getElementById('out');
+    const btnGen=document.getElementById('gen');
+    const btnDl=document.getElementById('download');
+    const btnShow=document.getElementById('show');
+    const btnCopy=document.getElementById('copy');
+    const btnReset=document.getElementById('reset');
+
+    function toNum(x){const v=parseFloat(x);return isFinite(v)?Math.max(0,Math.min(1,v)):0}
+    function updateACS(){
+      const p=toNum(purity.value), d=toNum(drift.value);
+      const lei=(leiSel.value==='ENFORCED')?1:0;
+      acsEl.textContent=(p*(1-d)*lei).toFixed(4);
+    }
+    purity.addEventListener('input',updateACS);
+    drift.addEventListener('input',updateACS);
+    leiSel.addEventListener('change',updateACS);
+    updateACS();
+
+    function uuid4(){
+      if(crypto&&crypto.randomUUID) return crypto.randomUUID();
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{
+        const r=Math.random()*16|0,v=c==='x'?r:(r&0x3|0x8);return v.toString(16);
+      });
+    }
+    function buildReceipt(){
+      const p=toNum(purity.value), d=toNum(drift.value);
+      const lei_state=leiSel.value;
+      const acs=p*(1-d)*(lei_state==='ENFORCED'?1:0);
+      return {
+        action_id: uuid4(),
+        actor:{model_id:"tqc/agent:v1",hw_id:"demo/chip:A",host:"browser-offline"},
+        lei_gate_state: lei_state,
+        acs_value: parseFloat(acs.toFixed(4)),
+        decision: (acs>=0.70)?"approve":"halt",
+        timestamp_utc: new Date().toISOString().replace(".000Z","Z"),
+        pqc_signature:{alg:"DEMO",sig:"THIS_IS_A_LOCAL_DEMO_NOT_A_REAL_SIGNATURE"},
+        attestation: attest.value
+      };
+    }
+    btnGen.addEventListener('click',()=>{ out.textContent=JSON.stringify(buildReceipt(),null,2) });
+    btnShow.addEventListener('click',()=>{
+      if(!out.textContent.trim()) out.textContent=JSON.stringify(buildReceipt(),null,2);
+      out.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+    btnDl.addEventListener('click',()=>{
+      const r=out.textContent.trim()?JSON.parse(out.textContent):buildReceipt();
+      const blob=new Blob([JSON.stringify(r,null,2)],{type:'application/json'});
+      const url=URL.createObjectURL(blob);const a=document.createElement('a');
+      a.href=url;a.download='acs_receipt_demo.json';document.body.appendChild(a);a.click();a.remove();
+      URL.revokeObjectURL(url);
+    });
+    btnCopy.addEventListener('click',async()=>{
+      const r=out.textContent.trim()?out.textContent:JSON.stringify(buildReceipt(),null,2);
+      try{await navigator.clipboard.writeText(r);btnCopy.textContent='Copied';setTimeout(()=>btnCopy.textContent='Copy JSON',1200);}catch(e){}
+    });
+    btnReset.addEventListener('click',()=>{purity.value=1;drift.value=0;leiSel.value='ENFORCED';attest.value='trusted';updateACS();out.textContent='';});
+  </script>
+</body>
+</html>
