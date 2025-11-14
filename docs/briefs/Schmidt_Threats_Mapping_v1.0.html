@@ -19,7 +19,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    fetch('/docs/briefs/Schmidt_Threats_Mapping_v1.0.md')
+    const r=await fetch(`Schmidt_Threats_Mapping_v1.0.md?v=${v}`);
       .then(r=>r.text()).then(md=>{document.getElementById('md').innerHTML=marked.parse(md)})
       .catch(()=>{document.getElementById('md').textContent='Error loading brief.'});
   </script>
