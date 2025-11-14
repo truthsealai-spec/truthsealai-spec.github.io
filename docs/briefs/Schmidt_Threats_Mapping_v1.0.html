@@ -19,7 +19,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    const url = "https://raw.githubusercontent.com/truthsealai-spec/truthsealai-spec.github.io/main/docs/briefs/Schmidt_Threats_Mapping_v1.0.md?cb="+Date.now();
+    const mdPath = "/docs/briefs/Schmidt_Threats_Mapping_v1.0.md";
       .then(r=>r.text()).then(md=>{document.getElementById('md').innerHTML=marked.parse(md)})
       .catch(()=>{document.getElementById('md').textContent='Error loading brief.'});
   </script>
