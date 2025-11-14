@@ -1,27 +1,32 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FSB / IMF — Sovereign Mandate (v1.0) — TruthSeal</title>
-  <link rel="stylesheet" href="/assets/ts-theme.css" />
-  <style>
-    .prose{max-width:920px;margin:40px auto;padding:28px 22px;background:var(--panel);
-      border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
-    .prose h1,.prose h2,.prose h3{margin:26px 0 8px}
-    pre,code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <h1 class="brand">TruthSeal<span class="small">™</span><br>Public Brief</h1>
-    <div id="md" class="prose">Loading…</div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-    fetch('/docs/briefs/FSB_IMF_Sovereign_Mandate_v1.0.md')
-      .then(r=>r.text()).then(md=>{document.getElementById('md').innerHTML=marked.parse(md)})
-      .catch(()=>{document.getElementById('md').textContent='Error loading brief.'});
-  </script>
-</body>
-</html>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FSB / IMF — Sovereign Mandate (v1.0) — TruthSeal</title>
+<link rel="stylesheet" href="/assets/ts-theme.css">
+<style>.prose{max-width:920px;margin:40px auto;padding:28px 22px;background:var(--panel);
+border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.6)}</style>
+</head><body>
+<div class="wrap">
+  <h1 class="brand">TruthSeal<span class="small">™</span><br>Public Brief</h1>
+  <div id="md" class="prose">Loading…</div>
+  <noscript><div class="prose"><p>JavaScript disabled. Open the Markdown version:</p>
+    <p><a href="/docs/briefs/FSB_IMF_Sovereign_Mandate_v1.0.md">FSB/IMF brief (.md)</a></p></div></noscript>
+</div>
+<script>
+(async()=>{
+  const v=Date.now();                 // cache-buster
+  const r=await fetch(`FSB_IMF_Sovereign_Mandate_v1.0.md?v=${v}`);
+  const md=await r.text();
+  // tiny inline renderer (no CDN): paragraphs + bold + code blocks
+  const html=md
+    .replace(/^# (.*)$/gm,'<h1>$1</h1>')
+    .replace(/^## (.*)$/gm,'<h2>$1</h2>')
+    .replace(/^### (.*)$/gm,'<h3>$1</h3>')
+    .replace(/```([\s\S]*?)```/g,'<pre><code>$1</code></pre>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/^\* (.*)$/gm,'<li>$1</li>')
+    .replace(/(?:\r?\n){2,}/g,'</p><p>')
+    .replace(/^((?!<h\d|<pre|<li).+)$/gm,'<p>$1</p>');
+  document.getElementById('md').innerHTML = html;
+})();
+</script>
+</body></html>
